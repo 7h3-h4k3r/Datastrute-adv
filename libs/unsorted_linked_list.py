@@ -1,5 +1,7 @@
 
-from libs import node
+from LInkedList.libs.nodes import node
+
+
 class UnsortedLinkedList:
     def __init__(self):
         self.head = None
@@ -21,8 +23,38 @@ class UnsortedLinkedList:
                 current = current.next
         except:
             self.head = current.next
-        
-        
+    
+    def delt(self,index):
+        current = self.head 
+        i = 0
+        previous = None
+
+        if self.len()-1 == index:
+            raise 'Value Error : invalidate Syntax out of Range'
+        try:
+            while current.next is not None:
+                if i == index:
+                    previous.next = current.next
+                    return
+                i+=1
+                previous = current
+                current = current.next
+        except:
+            self.head = current.next
+    def pop(self):
+        if self.head is None:
+            raise 'Value Error : InValidate syntax \'0\'' 
+        current = self.head 
+        lenof = self.len() -1
+        i = 1
+        while current.next is not None:
+            if i == lenof:
+                current.next = None
+                return
+            current = current.next
+            i+=1 
+
+        self.head = current  
     def len(self):
         lenof = 0
         current = self.head 
@@ -31,12 +63,9 @@ class UnsortedLinkedList:
             current = current.next
         return lenof+1
     
-    def indexInsert(self,data,index_value,remove=False):
-        if index_value <= 0:
+    def insert(self,data,index_value):
+        if index_value <= 0 or self.len()-1 < index_value:
             raise 'Value Error (you call a wrong function for this opration)'
-        elif remove:
-            self.remove(data,index_value)
-            return
         index = 0
         current = self.head 
         prevaios = None 
@@ -51,7 +80,7 @@ class UnsortedLinkedList:
         prevaios = prevaios.next
         prevaios.next = current
         
-    def insert(self,data,index=False):
+    def append(self,data,index=False):
         current = self.head
         if current is None:
             self.head = node.Node(data)
@@ -75,20 +104,22 @@ class UnsortedLinkedList:
             index+=1
         print('[{}-{}]-> None'.format(index,current.data))    
 Link = UnsortedLinkedList()
-Link.insert(10)
-Link.insert(20)
-Link.insert(30)
-Link.insert(40,True)
+Link.append(10)
+Link.append(20)
+Link.append(30)
+Link.append(40,True)
 Link.traverse()
-Link.indexInsert(60,2)
+Link.insert(60,2)
 Link.traverse()
-Link.indexInsert(70,1)
+Link.insert(70,1)
 Link.traverse()
 Link.remove(70)
 Link.traverse()
 Link.remove(40)
 Link.traverse()
-Link.insert(34)
-Link.indexInsert(89,3)
+Link.append(34)
 Link.traverse()
+Link.delt(2)
+Link.pop()
 print(Link.len())
+Link.traverse()

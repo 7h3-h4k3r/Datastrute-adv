@@ -1,5 +1,5 @@
 
-from LInkedList.libs.nodes import node
+from libs.nodes import node
 
 
 class UnsortedLinkedList:
@@ -103,23 +103,3 @@ class UnsortedLinkedList:
             current = current.next 
             index+=1
         print('[{}-{}]-> None'.format(index,current.data))    
-Link = UnsortedLinkedList()
-Link.append(10)
-Link.append(20)
-Link.append(30)
-Link.append(40,True)
-Link.traverse()
-Link.insert(60,2)
-Link.traverse()
-Link.insert(70,1)
-Link.traverse()
-Link.remove(70)
-Link.traverse()
-Link.remove(40)
-Link.traverse()
-Link.append(34)
-Link.traverse()
-Link.delt(2)
-Link.pop()
-print(Link.len())
-Link.traverse()

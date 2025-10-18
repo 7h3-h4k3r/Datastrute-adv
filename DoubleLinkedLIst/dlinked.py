@@ -28,11 +28,11 @@ class DynamicLinkedList:
 
         def _search(self,target):
             current = self.head 
-            while current.data != target: 
+            while current.next is not None:
+                if current.data == target:
+                    return current 
                 current = current.next 
-            
-            if current.data == target:
-                return current 
+        
             return None
         
         def deleted(self,data):
@@ -51,7 +51,8 @@ class DynamicLinkedList:
             else:
                 middelt = nodes.prev  
                 middelt.next = nodes.next
-                
+                middeat = nodes.next
+                middeat.prev = middelt
 
         def traverse(self):
             current = self.head
@@ -100,6 +101,7 @@ data.insert(10,30)
 data.insert(80,78,True)
 data.traverse()
 print("=======================")
-# data.deleted(80)
-# data.deleted(40)
+data.deleted(80)
+data.deleted(40)
 data.traverse_back()
+

@@ -4,7 +4,7 @@ class bin:
 
     def __init__(self):
         self.root = None
-
+        self.level_count = 0
     def insert(self,value):
         if self.root is None:
             self.root = node(value)
@@ -50,15 +50,36 @@ class bin:
             self.__findone__(target ,root.right)
         else:
             self.__findone__(target,root.left)
-        
 
         return False
     def search(self,target):
-        result = self.__findone__(target,self.root)
-        if result:
-            print("Target founded on the BinaryTres")
-        else:
-            print("Target Not found in this BinaryTree")
+        return self.__findone__(target,self.root)
+        
+
+
+
+
+    def getLevelCount(self):
+        print("=== Debug: Counting Levels ===")
+        result = self._getLevelCount(self.root)
+        print("=== Done ===")
+        return result
+    
+    def _getLevelCount(self, node, depth=0):
+        if node is None:
+            print(f"{'  '*depth}Reached NULL → return 0")
+            return 0
+        print(f"{'  '*depth}Node {node.value}: entering recursion...")
+        left_height = self._getLevelCount(node.left, depth+1)
+        right_height = self._getLevelCount(node.right, depth+1)
+        height = 1 + max(left_height, right_height)
+        print(f"{'  '*depth}Node {node.value}: left={left_height}, right={right_height} → return {height}")
+        return height
+
+
+
+
+
 
     def iterate(self,order=None):
         if order is None:
@@ -86,3 +107,4 @@ data.iterate()
 data.iterate(False)
 data.iterate(True)
 data.search(443)
+print(data.getLevelCount())

@@ -39,9 +39,9 @@ class heap:
         print(self.heap_list)
 
 Data = heap()
-data = [9, 7, 8, 6, 5, 1, 2, 3, 4]
+data = [9, 7, 8, 6, 5, 1, 2, 3, 4,10]
 for i in data:
     Data.insert(i)
 Data.display()
-Data.extract_Max()
+# Data.extract_Max()
 Data.display()

@@ -15,6 +15,8 @@ class heap:
         if index > 0 and self.heap_list[index] > self.heap_list[parent]:
             self.swap(parent=parent,index=index)
             self.heapify(parent)
+
+            
     def _len(self):
         return len(self.heap_list)
     def extract_Max(self):

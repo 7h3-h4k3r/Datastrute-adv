@@ -51,23 +51,30 @@ F: []
 G: []
 H: []
 '''
-    def bfs(self, start, target):
-        distance = {v:float('inf') for v in self.adj}
-        pred = {v:None for v in self.adj}
+    def BfSearch(self,start_vertax):
+        visited_lists = [start_vertax]
         q = Queue()
-        q._enqueue(start)
-        distance[start] = 0
-        while not  q.isempty():
+        q._enqueue(start_vertax)
+        while not q.isempty():
             u = q._dequeue()
-            if u == target:
-                return self.reconstruct_path(pred,target)
-            for nighber in self.adj[u].adj_list:
-                if distance[nighber.id] == float('inf'):
-                    distance[nighber.id] = distance[u] + 1 
-                    pred[nighber.id] = u 
-                    q._enqueue(nighber.id)
 
-        return None 
+            for child in self.adj[u].adj_list:
+                if child.id not in visited_lists:
+                    visited_lists.append(child.id)
+                    q._enqueue(child.id)
+        if len(visited_lists) == 0:
+            return None 
+        return visited_lists 
+    
+    def DfSearch(self,start_vertex,visited):
+        if start_vertex not in visited:
+            visited.append(start_vertex)
+             
+        for child in self.adj[start_vertex].adj_list:
+            self.DfSearch(child.id,visited)
+        
+        return visited
+        
     
 
     def reconstruct_path(self, pred, target):
@@ -97,7 +104,9 @@ opration._insertEdge('A','B')
 opration._insertEdge('B','C')
 opration._insertEdge('A','C')
 opration._insertEdge('C','F')
+opration._insertEdge('A','D')
 
 
-result = opration.bfs('A','F')
-print(result)
+bsf_result = opration.BfSearch('A')
+dfs_result = opration.DfSearch('A',[])
+print(dfs_result)

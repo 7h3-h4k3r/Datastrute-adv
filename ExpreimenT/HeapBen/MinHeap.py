@@ -1,5 +1,17 @@
 from libs.node import Node 
+'''
 
+Challenge : MinHeap 
+
+Beginner Level — Core Understanding
+
+Build a Min Heap
+
+Input: [4, 10, 3, 5, 1]
+
+Output: [1, 4, 3, 10, 5]
+
+'''
 class MinHeap:
 
     def __init__(self):
@@ -23,7 +35,20 @@ class MinHeap:
             else:
                 q.append(node.left)
                 q.append(node.right)
+    def bsf(self):
+        visited = []
+        q = [self.root]
+        while q:
+            u = q.pop(0)
+            visited.append(u.data)
+            if u.right:
+                q.append(u.right)
+            if u.left:
+                q.append(u.left)
+           
         
+        return visited
+            
     def heapify(self,node):
         while node.data < self.root.data:
             parent = self._getParent(node,self.root)
@@ -47,12 +72,11 @@ class MinHeap:
             return right 
         return None
     
-
+    
 h = MinHeap()
-h.insert(1)
-h.insert(2)
-h.insert(3)
 h.insert(4)
+h.insert(10)
+h.insert(3)
 h.insert(5)
-h.insert(6)
-h.insert(0)
+h.insert(1)
+print(h.bsf())
